@@ -11,13 +11,15 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'mvn -B clean package'
-            }
+		dir('lab10/starter'){  
+              sh 'mvn -B clean package'
+            }}
         }
         stage('Test') {
             steps {
+		dir('lab10/starter'){
                 sh 'mvn -B test'
-            }
+            }}
             post {
                 always {
                     junit 'target/test-reports/*.xml'
@@ -26,8 +28,9 @@ pipeline {
         }
         stage('Archive') {
             steps {
-                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
-            }
+        	dir('lab10/starter'){      
+	  	archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+            }}
         }
     }
 }
