@@ -22,14 +22,14 @@ pipeline {
             }}
             post {
                 always {
-                    junit 'target/test-reports/*.xml'
+                    junit 'starter/target/test-reports/*.xml'
                 }
             }
         }
         stage('Archive') {
             steps {
         	dir('starter'){      
-	  	archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+	  	archiveArtifacts artifacts: 'starter/target/*.jar', fingerprint: true
             }}
         }
     }
